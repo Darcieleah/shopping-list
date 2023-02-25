@@ -1,18 +1,17 @@
 import React, { FC } from 'react';
 import styles from './Main.module.scss';
+import Product from '../Product/Product';
+import Item from '../../items/Item';
 
 interface MainProps {
-  products: { id: number; name: string; price: number; }[];
+  products: Item[];
+  onAdd: (product: Item) => void; 
 }
 
-const Main: FC<MainProps> = ({products}) => {
+function Main(props: MainProps) {
   return (
   <main className={styles.Main} data-testid="Main">
-    <ul>
-        {
-           products.map(product => <li value={product.name} key={product.id}> {product.name} {product.price} </li>)
-        }
-      </ul>
+    {props.products.map(product => (<Product key={product.id} product={product} onAdd={props.onAdd}></Product>))}
   </main>
   )
 };

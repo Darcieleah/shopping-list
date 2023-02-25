@@ -4,9 +4,15 @@ import styles from './Main.module.scss';
 interface MainProps {}
 
 const Main: FC<MainProps> = () => (
-  <div className={styles.Main} data-testid="Main">
-    Main Component
-  </div>
+  <section className={styles.Main} data-testid="Main">
+    <ul>
+      <li>test item</li>
+      <li>test item</li>
+      <li>test item</li>
+      <li>test item</li>
+      <li>test item</li>
+    </ul>
+  </section>
 );
 
 export default Main;

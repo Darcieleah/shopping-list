@@ -4,9 +4,9 @@ import styles from './Header.module.scss';
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => (
-  <div className={styles.Header} data-testid="Header">
-    Header Component
-  </div>
+  <header className={styles.Header} data-testid="Header">
+    <h1>Shopping List</h1>
+  </header>
 );
 
 export default Header;

@@ -28,19 +28,7 @@ function App() {
     }
   };
 
-  // const onRemove = (product:Item) => {
-  //   const billItem = billItems.find(x => x.id === product.id);
-  //   if(billItem) {
-  //     if(billItem.quantity > 1) {
-  //       billItem.quantity = billItem.quantity -1;
-  //     } else {
-  //       // remove item from bill items array
-  //       // this sets the bill items array to a list of all objects that don't match the product it
-  //       // effectively removing bill item from the array
-  //       setBillItems(billItems.filter(x => x.id !== product.id));
-  //     }
-  //   }
-  // };
+  //TODO: add remove method which could be used to remove singular items
 
   const onClear = () => {
     // remove all bill items

@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import styles from './Bill.module.scss';
 import BilledItem from '../../items/BilledItem';
 import Offers from './Offers';
+import Button from '@mui/material/Button';
 
 
 type BillProps = {
   billItems: BilledItem[],
-  //TODO: add on add functionality directing from bill
+  //TODO: add on add functionality directly from bill
+  //TODO: add on remove functionality directly from bill
   onClear: () => void;
 }
 
-//TODO move billed item class into here?
+//TODO move billed item class into here as an interface?
 interface Offer {
   name: string;
   saving: number;
@@ -24,40 +26,40 @@ function Bill(props: BillProps) {
     }, 0);
   }
 
-  // values for the 3 price rows to show on the bill, and the functions that update them
   const [beforeSavings, setBeforeSavings] = useState<number>(getTotalPrice(props.billItems));
   const [afterSavings, setAfterSavings] = useState<number>(beforeSavings);
   const [savings, setSavings] = useState<Offer[]>([]);
 
-  // add a button to calculate savings so it doesn't happen on render and cause loop error
+  // had to add a button to calculate savings so it doesn't happen on render and cause loop error
   // TODO: improve this - only calculate savings when bill items is populated?
   const handleCalculateSavings = () => {
     let totalSavings: Offer[] = [];
 
-    // cheese offer
     // TODO: use enums instead of hardcoding to id value from product data
+    // TODO: display name of offer in user friendly way
+
+    // cheese offer
     const cheeseCount = props.billItems.find(x => x.id === 3)?.quantity;
-    if (cheeseCount) {
+    if (cheeseCount && cheeseCount > 1) {
       const freeCheeseCount = Math.floor(cheeseCount / 2);
       const cheeseSavings = freeCheeseCount * 0.9;
-      totalSavings.push({name: "cheese offer", saving: cheeseSavings});
+      totalSavings.push({name: "BOGOF on cheese", saving: cheeseSavings});
     }
 
     // soup and bread offer
     const soupCount = props.billItems.find(x => x.id === 4)?.quantity;
     const breadCount = props.billItems.find(x => x.id === 1)?.quantity;
     if (soupCount && breadCount) {
-      // ???
       const halfPriceBreadCount = Math.min(soupCount, breadCount);
       const breadSavings = halfPriceBreadCount * 0.55;
-      totalSavings.push({name: "soup and bread offer", saving: breadSavings});
+      totalSavings.push({name: "Half price bread with soup", saving: breadSavings});
     }
 
     // butter offer
     const butterCount = props.billItems.find(x => x.id === 5)?.quantity;
     if (butterCount) {
       const butterSavings = butterCount * 0.4;
-      totalSavings.push({name: "butter offer", saving: butterSavings});
+      totalSavings.push({name: "1/3 off butter", saving: butterSavings});
     }
 
     // add all the saving values from the offers
@@ -74,26 +76,28 @@ function Bill(props: BillProps) {
     setSavings([]);
     props.onClear();
   };
+  
+  //TODO: only show savings and total footer if there are bill items
 
   return (
   <aside className={styles.Bill} data-testid="Bill">
-    <h2>Your Bill</h2>
+    <h2 className={styles.billHeading}>Your Bill</h2>
     <div>{props.billItems.length === 0 && <p>"No items"</p>}</div>
     {props.billItems.map((item) => (
     <div className={styles.billRow} key={item.id}>
       <p>{item.name}</p>
-      <p>{item.price}</p>
-      <p>{item.quantity}</p>
+      <p>£{item.price.toFixed(2)}</p>
+      <p>x{item.quantity}</p>
     </div>
     ))}
-    <footer>
+    <div className={styles.extraMargin}>
       <p>Total Before savings: £{beforeSavings.toFixed(2)}</p>
       <p>Your savings:</p>
       {savings.map(offer => (<Offers key={offer.name} name={offer.name} saving={offer.saving}></Offers>))}
       <p>Total After savings: £{afterSavings.toFixed(2)}</p>  
-    </footer>
-    <button onClick={handleCalculateSavings}>Calculate my bill</button>
-    <button onClick={() => resetBill()}>Clear my bill</button>
+    </div>
+    <Button className={styles.calculateButton} variant="contained" onClick={handleCalculateSavings}>Calculate my bill</Button>
+    <Button className={styles.clearButton} variant="contained" onClick={() => resetBill()}>Clear my bill</Button>
   </aside>
 )};
 

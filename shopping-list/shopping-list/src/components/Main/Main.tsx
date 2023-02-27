@@ -11,7 +11,7 @@ interface MainProps {
 function Main(props: MainProps) {
   return (
   <main className={styles.Main} data-testid="Main">
-    {props.products.map(product => (<Product key={product.id} product={product} onAdd={props.onAdd}></Product>))}
+    <Product onAdd={props.onAdd} products={props.products}></Product>
   </main>
   )
 };

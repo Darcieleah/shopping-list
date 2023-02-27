@@ -1,7 +1,30 @@
 .Bill {
     grid-area: bill;
-    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    background-color: #e8d8e1;
+    justify-self: center;
+    width: 300px;
+    text-align: center;
+}
+.billHeading {
+    color: #581c60;
+    text-decoration: underline;
 }
 .billRow {
     display: flex;
+    justify-content: space-between;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.extraMargin {
+    margin-bottom: 3em;
+}
+.calculateButton {
+    //TODO: find out how to override react material ui styling and don't use important
+    background-color: #581c60 !important;
+}
+.clearButton {
+    //TODO: find out how to override react material ui styling and don't use important
+    background-color: #e6a122 !important;
 }

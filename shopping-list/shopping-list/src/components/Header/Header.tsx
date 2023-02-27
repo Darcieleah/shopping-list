@@ -5,7 +5,7 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => (
   <header className={styles.Header} data-testid="Header">
-    <h1>Shopping List</h1>
+    <h1>Shopping</h1>
   </header>
 );
 

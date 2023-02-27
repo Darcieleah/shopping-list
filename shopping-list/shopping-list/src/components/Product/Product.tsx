@@ -10,14 +10,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
-
 type ProductProps = {
-    products: Item[];
-    onAdd: (product: Item) => void; 
+  products: Item[];
+  onAdd: (product: Item) => void; 
 }
 
 function Product(props: ProductProps) {
-  //TODO: add main ui styling to this and add to a table
   const rows = props.products;
   return (
     <TableContainer component={Paper}>

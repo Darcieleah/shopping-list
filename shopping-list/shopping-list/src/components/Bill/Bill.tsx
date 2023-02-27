@@ -38,7 +38,7 @@ function Bill(props: BillProps) {
     // TODO: use enums instead of hardcoding to id value from product data
     // TODO: display name of offer in user friendly way
 
-    // cheese offer
+    // When you buy a Cheese, you get a second Cheese free!
     const cheeseCount = props.billItems.find(x => x.id === 3)?.quantity;
     if (cheeseCount && cheeseCount > 1) {
       const freeCheeseCount = Math.floor(cheeseCount / 2);
@@ -46,7 +46,7 @@ function Bill(props: BillProps) {
       totalSavings.push({name: "BOGOF on cheese", saving: cheeseSavings});
     }
 
-    // soup and bread offer
+    //When you buy a Soup, you get a half price Bread!
     const soupCount = props.billItems.find(x => x.id === 4)?.quantity;
     const breadCount = props.billItems.find(x => x.id === 1)?.quantity;
     if (soupCount && breadCount) {
@@ -55,7 +55,7 @@ function Bill(props: BillProps) {
       totalSavings.push({name: "Half price bread with soup", saving: breadSavings});
     }
 
-    // butter offer
+    // Get a third off Butter!
     const butterCount = props.billItems.find(x => x.id === 5)?.quantity;
     if (butterCount) {
       const butterSavings = butterCount * 0.4;
